@@ -22,7 +22,7 @@ export default (item: PercentChangeWorkerData|PercentChangeWorkerData[]) => {
         |PercentChangeWorkerResult[]
     >((resolve) => {
         channel.port2.onmessage = (event: MessageEvent) => {
-            resolve(event.data);
+            resolve(event.data.result);
         };
     });
 };
