@@ -1,9 +1,11 @@
 import { createApp } from 'vue';
-import '@/assets/css/app.scss';
+import '@/assets/css/app.css';
 import App from '@/App.vue';
 import '@/registerServiceWorker';
 import router from '@/router';
 
-createApp(App)
+const app = createApp(App)
     .use(router)
     .mount('#app');
+
+console.log('Loaded:', app);

@@ -1,11 +1,10 @@
 <template>
     <main>
-        <div>
-            <DoughnutChart
-                v-model:data="portfolio"
-                label="Portfolio"
-            />
-        </div>
+        <DoughnutChart
+            :data="portfolio"
+            label="Portfolio"
+            class="w-56"
+        />
     </main>
 </template>
 
@@ -26,7 +25,7 @@ export default defineComponent({
     setup() {
         const currentState = ref(State.DEFAULT);
         const stats = ref<AssetList>({});
-        const portfolio = ref({ ltc: 50 });
+        const portfolio = ref({ ltc: 50, eth: 32 });
 
         const component = {
             currentState,

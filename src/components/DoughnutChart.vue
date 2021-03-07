@@ -1,10 +1,10 @@
 <template>
-    <div ref="wrapper" class="position-relative square">
+    <div v-if="data" ref="wrapper" class="relative square">
         <canvas
             ref="chart"
             :height="height"
             :width="width"
-            :aria-label="label"
+            :aria-label="`${label} Chart`"
             role="img"
         >
             <p>
@@ -14,6 +14,9 @@
             </p>
         </canvas>
     </div>
+    <div v-else>
+        N/A
+    </div>
 </template>
 
 <script lang="ts">
@@ -21,7 +24,10 @@ import {
     defineComponent,
     watch,
     computed,
-    ref
+    ref,
+    PropType,
+    onMounted,
+    onBeforeUnmount
 } from 'vue';
 import {
     Chart,
@@ -38,6 +44,7 @@ import { objectsAreEqual } from '@/utils/objects-are-equal';
 // Register DoughnutChart
 Chart.register(DoughnutController, ArcElement, Tooltip, Legend, Title);
 
+// Setup state
 enum State {
     DEFAULT = 0,
     NO_DATA_ERROR,
@@ -48,7 +55,10 @@ enum State {
 export default defineComponent({
     inheritAttrs: true,
     props: {
-        data: Object,
+        data: {
+            type: Object as PropType<Record<string, number>>,
+            default: {}
+        },
         label: {
             type: String,
             required: false
@@ -112,7 +122,7 @@ export default defineComponent({
                             text: props.label,
                             font: {
                                 style: 'normal',
-                                family: 'Roboto',
+                                family: 'sans-serif',
                                 size: 18,
                                 weight: '500'
                             }
@@ -132,10 +142,12 @@ export default defineComponent({
 
             // Init. chart
             chartRender.value = new Chart(ctx.value, cfg.value);
+
+            console.warn('CHART', chartRender.value);
         };
 
         // After mount set context and create chart
-        const onMounted = () => {
+        onMounted(() => {
             console.warn('Running onMounted');
 
             // Check for context
@@ -155,10 +167,10 @@ export default defineComponent({
 
             // Create chart
             init();
-        };
+        });
 
         // On component destory, destroy chart instance
-        const beforeUnmount = () => chartRender.value?.destroy();
+        onBeforeUnmount(() => chartRender.value?.destroy());
 
         // Rebuild chart on data updates
         watch(() => props.data, (value, previousValue) => {
@@ -189,10 +201,7 @@ export default defineComponent({
             labels,
             chartData,
             chartDataSets,
-            cfg,
-            init,
-            onMounted,
-            beforeUnmount
+            cfg
         };
         console.warn('DOUGHNUT CHART SETUP:', component);
         return component;
