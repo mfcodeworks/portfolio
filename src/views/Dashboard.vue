@@ -1,26 +1,40 @@
 <template>
     <main>
-
+        <div>
+            <DoughnutChart
+                v-model:data="portfolio"
+                label="Portfolio"
+            />
+        </div>
     </main>
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
 import { AssetList } from '@/types';
+import DoughnutChart from '@/components/DoughnutChart.vue';
+import { defineComponent, ref } from 'vue';
 
 enum State {
     DEFAULT = 0,
     LOADING
 }
 
-@Options({})
-export default class Dashboard extends Vue {
-    currentState = State.DEFAULT;
-    stats: AssetList = {};
+export default defineComponent({
+    components: {
+        DoughnutChart
+    },
+    setup() {
+        const currentState = ref(State.DEFAULT);
+        const stats = ref<AssetList>({});
+        const portfolio = ref({ ltc: 50 });
 
-    created() {
-        // TODO: WebWorker calculation
-        this.stats = {};
+        const component = {
+            currentState,
+            stats,
+            portfolio
+        };
+        console.warn('DASHBOARD SETUP', component);
+        return component;
     }
-}
+});
 </script>
