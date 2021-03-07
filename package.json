@@ -13,6 +13,7 @@
     "chartjs-adapter-date-fns": "^1.1.0-alpha.3",
     "core-js": "^3.6.5",
     "date-fns": "^2.19.0",
+    "localforage": "^1.9.0",
     "register-service-worker": "^1.7.1",
     "rxjs": "^7.0.0-beta.12",
     "vue": "^3.0.0",
