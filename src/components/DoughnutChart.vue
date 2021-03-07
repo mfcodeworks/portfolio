@@ -142,14 +142,10 @@ export default defineComponent({
 
             // Init. chart
             chartRender.value = new Chart(ctx.value, cfg.value);
-
-            console.warn('CHART', chartRender.value);
         };
 
         // After mount set context and create chart
         onMounted(() => {
-            console.warn('Running onMounted');
-
             // Check for context
             ctx.value = chart.value?.getContext('2d') ?? null;
 
@@ -191,7 +187,7 @@ export default defineComponent({
         });
 
         // Setup component
-        const component = {
+        return {
             height,
             width,
             currentState,
@@ -203,8 +199,6 @@ export default defineComponent({
             chartDataSets,
             cfg
         };
-        console.warn('DOUGHNUT CHART SETUP:', component);
-        return component;
     }
 });
 </script>

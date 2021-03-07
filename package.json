@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "webpack:inspect": "vue inspect > webpack.js"
   },
   "dependencies": {
     "autoprefixer": "^9.8.6",
@@ -43,6 +44,7 @@
     "postcss-loader": "^5.1.0",
     "typescript": "~3.9.3",
     "vue-cli-plugin-webpack-bundle-analyzer": "~4.0.0",
-    "vue-jest": "^5.0.0-0"
+    "vue-jest": "^5.0.0-0",
+    "worker-loader": "^3.0.8"
   }
 }
