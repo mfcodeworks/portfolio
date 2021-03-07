@@ -14,8 +14,9 @@ module.exports = {
     rules: {
         'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
         'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+        'comma-dangle': ['error', 'never'],
         indent: ['warn', 4],
-        'comma-dangle': ['error', 'never']
+        'lines-between-class-members': ['error', 'never']
     },
     overrides: [
         {
